@@ -1,6 +1,6 @@
 #include "Zombie.hpp"
 
-Zombie* newZomvie(std::string name)
+Zombie* newZombie(std::string name)
 {
 	Zombie *bob = new Zombie();
 	bob->setName(name);

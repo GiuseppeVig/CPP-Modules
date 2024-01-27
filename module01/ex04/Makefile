@@ -1,7 +1,11 @@
-OBJS 	= $(SRC:.c=.o)
+NAME	= Sed
+SRCS	= Sed.cpp
+OBJS 	= $(SRCS:.c=.o)
+CC 		= c++
+FLAGS	= -std=c++98 -Wall -Wextra -Werror
 
 $(NAME): $(OBJS)
-	$(CC) $(FLAGS) $(SRC) -o $(NAME)
+	$(CC) $(FLAGS) $(SRCS) -o $(NAME)
 
 all: $(NAME) $(OBJS)
 

@@ -1,7 +1,11 @@
+NAME	= UnnecessaryViolence
+SRCS	= main.cpp Weapon.cpp HumanA.cpp HumanB.cpp
 OBJS 	= $(SRC:.c=.o)
+CC 		= c++
+FLAGS	= -std=c++98 -Wall -Wextra -Werror
 
 $(NAME): $(OBJS)
-	$(CC) $(FLAGS) $(SRC) -o $(NAME)
+	$(CC) $(FLAGS) $(SRCS) -o $(NAME)
 
 all: $(NAME) $(OBJS)
 

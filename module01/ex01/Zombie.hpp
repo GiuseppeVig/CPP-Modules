@@ -12,12 +12,12 @@ public:
 	void		setName(std::string str);
 	std::string	getName();
 	void		announce(void);
-	Zombie();
-	~Zombie(){
-	std::cout<<name<<" Is dead!"<<std::endl;
-	}
+	Zombie(void);
+	~Zombie(void);
+	Zombie(std::string name);
 };
 
 void	announce(void);
+Zombie *zombieHorde(int N, std::string name);
 
 #endif

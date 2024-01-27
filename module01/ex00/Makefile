@@ -1,10 +1,11 @@
 NAME	= Zombie
+SRCS	= main.cpp Zombie.cpp newZombie.cpp randomChump.cpp
+CC 		= c++
 FLAGS	= -std=c++98 -Wall -Wextra -Werror
-SRC	= main.cpp Zombie.cpp newZombie.cpp randomChump.cpp
 OBJS 	= $(SRC:.c=.o)
 
 $(NAME): $(OBJS)
-	$(CC) $(FLAGS) $(SRC) -o $(NAME)
+	$(CC) $(FLAGS) $(SRCS) -o $(NAME)
 
 all: $(NAME) $(OBJS)
 

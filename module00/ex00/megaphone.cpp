@@ -6,7 +6,7 @@
 /*   By: gvigilan <gvigilan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/23 18:42:46 by gvigilan          #+#    #+#             */
-/*   Updated: 2023/11/23 19:15:55 by gvigilan         ###   ########.fr       */
+/*   Updated: 2024/01/22 16:38:59 by gvigilan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,10 +36,12 @@ int	main(int argc, char **argv)
 		std::cout << "*LOUD MEGAPHONE NOISES*";
 	}
 	else
-	while (i < argc)
 	{
-		std::cout << upper(argv[i]);
-		i++;
+		while (i < argc)
+		{
+			std::cout << upper(argv[i]);
+			i++;
+		}
 	}
 	std::cout << std::endl;
 	return (0);

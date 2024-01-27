@@ -2,7 +2,7 @@ NAME = megaphone
 SRC		=	megaphone.cpp
 CC 		= c++
 FLAGS	= -std=c++98 -Wall -Wextra -Werror
-OBJS 	= $(SRC:.c=.o)
+OBJS 	= $(SRC:.cpp=.o)
 
 $(NAME): $(OBJS)
 	$(CC) $(FLAGS) $(SRC) -o $(NAME)

@@ -1,8 +1,11 @@
-NAME	= 
-OBJS 	= $(SRC:.c=.o)
+NAME	= Brain
+SRCS	= main.cpp
+CC 		= c++
+FLAGS	= -std=c++98 -Wall -Wextra -Werror
+OBJS 	= $(SRCS:.cpp=.o)
 
 $(NAME): $(OBJS)
-	$(CC) $(FLAGS) $(SRC) -o $(NAME)
+	$(CC) $(FLAGS) $(SRCS) -o $(NAME)
 
 all: $(NAME) $(OBJS)
 
