@@ -8,8 +8,7 @@ class Contact {
 		char nickname[100];
 		long	phone_number;
 		char darkest_secret[100];
-		~Contact(){
-		};
+		~Contact();
 };
 
 #endif

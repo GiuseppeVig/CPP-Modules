@@ -13,6 +13,7 @@ all: $(NAME) $(OBJS)
 		$(CC) $(FLAGS) -c $< -o $@
 
 clean:
+	rm -rf $(OBJS)
 	rm -rf $(NAME)
 
 fclean: clean

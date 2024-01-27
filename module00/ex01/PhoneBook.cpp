@@ -23,6 +23,10 @@ int	strlen(std::string str)
 	return (i);
 }
 
+PhoneBook::~PhoneBook(void){}
+
+PhoneBook::PhoneBook(void){}
+
 Contact* add()
 {
 	Contact	*contact=new Contact();
@@ -88,7 +92,7 @@ void	search_phonebook(PhoneBook *myPhone)
 		std::cout << "You have no friends" << std::endl;
 		return;
 	}
-	std::cout << "Here your list of friends: " << std::endl;
+	std::cout << "Here's your list of friends: " << std::endl;
 	for (int i = 0; i < myPhone->index; i++)
 		print_list(myPhone, i);
 	std::cout << "Choose an index" << std::endl;
@@ -97,29 +101,4 @@ void	search_phonebook(PhoneBook *myPhone)
 		print_list(myPhone, j);
 	else
 		std::cout<<"Invalid Index! Either the contact doesn't exist or it's out of range"<<std::endl;
-}
-
-int	main()
-{
-	PhoneBook *myPhoneBook = new PhoneBook();
-	std::string command;
-	myPhoneBook->index = 0;
-	while (1)
-	{
-		std::cout << "What would you like to do?" << std::endl;
-		std::cin >> command;
-		if (command == "ADD")
-		{
-			Contact	*contact = add();
-			myPhoneBook->friends[myPhoneBook->index++] = *contact;
-			delete contact;
-		}
-		else if (command == "SEARCH")
-			search_phonebook(myPhoneBook);
-		else if (command == "EXIT")
-			break;
-	}
-	delete myPhoneBook;
-	std::cout<<"Goodbye"<<std::endl;
-	return (0);
 }
