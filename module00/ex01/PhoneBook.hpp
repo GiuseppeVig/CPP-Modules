@@ -2,8 +2,6 @@
 # define PHONEBOOK_HPP
 
 # include "Contact.hpp"
-# include <iostream>
-# include <string>
 
 class PhoneBook
 {
@@ -15,7 +13,7 @@ class PhoneBook
 };
 
 int	strlen(std::string str);
-Contact* add();
+void add(PhoneBook *phoneBook);
 void	print_list(PhoneBook *myPhone, int i);
 void	search_phonebook(PhoneBook *myPhone);
 

@@ -6,12 +6,32 @@
 /*   By: gvigilan <gvigilan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/23 22:19:05 by gvigilan          #+#    #+#             */
-/*   Updated: 2023/11/23 23:24:49 by gvigilan         ###   ########.fr       */
+/*   Updated: 2024/01/30 14:43:29 by gvigilan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <string>
 #include "PhoneBook.hpp"
+
+PhoneBook::~PhoneBook(void)
+{
+		std::cout<<"Goodbye"<<std::endl;
+}
+
+PhoneBook::PhoneBook(void){}
+
+int	ft_digit(std::string str)
+{
+	int	i;
+
+	i = 0;
+	while (str[i])
+	{
+		if (str[i] < '0' || str[i] > '9')
+			return (0);
+		i++;
+	}
+	return (1);
+}
 
 int	strlen(std::string str)
 {
@@ -23,24 +43,29 @@ int	strlen(std::string str)
 	return (i);
 }
 
-PhoneBook::~PhoneBook(void){}
-
-PhoneBook::PhoneBook(void){}
-
-Contact* add()
+void add(PhoneBook *phoneBook)
 {
-	Contact	*contact=new Contact();
+	char num[100];
 	std::cout << "Give me the first name of the new contact" << std::endl;
-	std::cin >> contact->first_name;
+	std::cin >> phoneBook->friends[phoneBook->index].first_name;
 	std::cout << "Give me the last name of the new contact" << std::endl;
-	std::cin >> contact->last_name;
+	std::cin >> phoneBook->friends[phoneBook->index].last_name;
 	std::cout << "Give me the nickname of the new contact" << std::endl;
-	std::cin >> contact->nickname;
-	std::cout << "Give me the phone_number of the new contact" << std::endl;
-	std::cin >> contact->phone_number;
+	std::cin >> phoneBook->friends[phoneBook->index].nickname;
+	while (1)
+	{
+		std::cout << "Give me the phone_number of the new contact" << std::endl;
+		std::cin >> num;
+		if (ft_digit(num))
+		{
+			phoneBook->friends[phoneBook->index].phone_number = atoi(num);
+			break;
+		}
+		else
+			std::cout << "ERROR: Not a viable number" << std::endl;
+	}
 	std::cout << "Give me the darkest secret of the new contact" << std::endl;
-	std::cin >> contact->darkest_secret;
-	return (contact);
+	std::cin >> phoneBook->friends[phoneBook->index].darkest_secret;
 }
 
 void	print_list(PhoneBook *myPhone, int i)
@@ -86,7 +111,7 @@ void	print_list(PhoneBook *myPhone, int i)
 
 void	search_phonebook(PhoneBook *myPhone)
 {
-	int j;
+	char j[1];
 	if (myPhone->index == 0)
 	{
 		std::cout << "You have no friends" << std::endl;
@@ -97,8 +122,10 @@ void	search_phonebook(PhoneBook *myPhone)
 		print_list(myPhone, i);
 	std::cout << "Choose an index" << std::endl;
 	std::cin >> j;
-	if (j < myPhone->index)
-		print_list(myPhone, j);
-	else
-		std::cout<<"Invalid Index! Either the contact doesn't exist or it's out of range"<<std::endl;
+	if (atoi(j)  > myPhone->index + 1 || !ft_digit(j))
+	{
+		std::cout<<"ERROR: Invalid Index"<<std::endl;
+		return;
+	}
+	print_list(myPhone, atoi(j) - 1);
 }

@@ -11,11 +11,10 @@ int	main()
 		std::cin >> command;
 		if (command == "ADD")
 		{
-			Contact	*contact = add();
 			if (myPhoneBook->index == 8)
 				myPhoneBook->index = 0;
-			myPhoneBook->friends[myPhoneBook->index++] = *contact;
-			delete contact;
+			add(myPhoneBook);
+			myPhoneBook->index++;
 		}
 		else if (command == "SEARCH")
 			search_phonebook(myPhoneBook);
@@ -23,6 +22,5 @@ int	main()
 			break;
 	}
 	delete myPhoneBook;
-	std::cout<<"Goodbye"<<std::endl;
 	return (0);
 }
