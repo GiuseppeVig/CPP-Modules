@@ -24,12 +24,12 @@ Harl::Harl()
 {
 	levels[0].lv = "DEBUG";
 	levels[0].func = &Harl::debug;
-	levels[0].lv = "INFO";
-	levels[0].func = &Harl::info;
-	levels[0].lv = "WARNING";
-	levels[0].func = &Harl::warning;
-	levels[0].lv = "ERROR";
-	levels[0].func = &Harl::error;
+	levels[1].lv = "INFO";
+	levels[1].func = &Harl::info;
+	levels[2].lv = "WARNING";
+	levels[2].func = &Harl::warning;
+	levels[3].lv = "ERROR";
+	levels[3].func = &Harl::error;
 }
 
 Harl::~Harl()
@@ -38,8 +38,15 @@ Harl::~Harl()
 
 void	Harl::complain(std::string level)
 {
-	static int i = -1;
-	if (i <= 3)
-		level == levels[++i].lv ? (this->*levels[i].func)() : complain(level) ;
-	i = -1;
+	int i = 0;
+	while (i < 4)
+	{
+		if (this->levels[i].lv == level)
+		{
+			(this->*levels[i].func)();
+			break;
+		}
+		else 
+			i++;
+	}
 }

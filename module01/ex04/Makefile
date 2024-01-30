@@ -1,16 +1,12 @@
 NAME	= Sed
-SRCS	= Sed.cpp
-OBJS 	= $(SRCS:.c=.o)
+SRCS	= main.cpp
 CC 		= c++
 FLAGS	= -std=c++98 -Wall -Wextra -Werror
 
-$(NAME): $(OBJS)
+$(NAME): 
 	$(CC) $(FLAGS) $(SRCS) -o $(NAME)
 
-all: $(NAME) $(OBJS)
-
-%.o: %.c
-		$(CC) $(FLAGS) -c $< -o $@
+all: $(NAME) 
 
 clean:
 	rm -rf $(NAME)
