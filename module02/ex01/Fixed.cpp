@@ -9,13 +9,13 @@ Fixed::Fixed(void)
 Fixed::Fixed(const int value)
 {
 	std::cout<<"Int constructor called"<<std::endl;
-	fixedPoint = value;
+	fixedPoint = value << bits;
 }
 
 Fixed::Fixed(const float number)
 {
 	std::cout<<"Float constructor called"<<std::endl;
-	fixedPoint = number;
+	fixedPoint = roundf(number * (1 << bits));
 }
 
 Fixed::~Fixed()
@@ -55,14 +55,10 @@ void    Fixed::setRawBits(int const raw)
 
 float   Fixed::toFloat(void) const
 {
-	float	temp;
-	temp = getRawBits();
-	return temp;
+	return (float)fixedPoint/(float)(1 << bits);
 }
 
 int     Fixed::toInt(void) const
 {
-	int	temp;
-	temp = getRawBits();
-	return temp;
+	return fixedPoint >> bits;
 }

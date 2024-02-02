@@ -1,7 +1,7 @@
-NAME = FragTrap
+NAME = Polymorphism
 CC = c++
 FLAGS = -std=c++98 -Wall -Werror -Wextra -g 
-SRCS = ClapTrap.cpp FragTrap.cpp main.cpp
+SRCS = main.cpp Animal.cpp Dog.cpp Cat.cpp Brain.cpp
 OBJS = $(SRCS:%.cpp=%.o)
 
 all: $(NAME)
