@@ -1,70 +1,58 @@
 #include "Form.hpp"
+#include "Bureaucrat.hpp"
 
-// Exception Messages
-const char *Form::GradeTooHighException::what() const throw()
-{
-    return "Form: Grade too high!";
-}
-
-const char *Form::GradeTooLowException::what() const throw()
-{
-    return "Form: Grade too low!";
-}
-
-// Default Constructor
-Form::Form() : _name("Default Form"), _isSigned(false), _gradeToSign(50), _gradeToExecute(25)
-{
-}
-
-// Parameterized Constructor
-Form::Form(const std::string &name, int gradeToSign, int gradeToExecute)
-    : _name(name), _isSigned(false), _gradeToSign(gradeToSign), _gradeToExecute(gradeToExecute)
-{
+// Constructor with validation
+Form::Form(const std::string& name, int gradeToSign, int gradeToExecute)
+    : _name(name), _isSigned(false), _gradeToSign(gradeToSign), _gradeToExecute(gradeToExecute) {
     if (gradeToSign < 1 || gradeToExecute < 1)
-        throw GradeTooHighException();
+        throw Form::GradeTooHighException();
     if (gradeToSign > 150 || gradeToExecute > 150)
-        throw GradeTooLowException();
+        throw Form::GradeTooLowException();
 }
 
 // Copy Constructor
-Form::Form(const Form &src)
-    : _name(src._name), _isSigned(src._isSigned), _gradeToSign(src._gradeToSign), _gradeToExecute(src._gradeToExecute)
-{
-}
-
-// Destructor
-Form::~Form()
-{
-}
+Form::Form(const Form& other)
+    : _name(other._name), _isSigned(other._isSigned),
+      _gradeToSign(other._gradeToSign), _gradeToExecute(other._gradeToExecute) {}
 
 // Assignment Operator
-Form &Form::operator=(const Form &src)
-{
-    if (this != &src)
-        _isSigned = src._isSigned;
+Form& Form::operator=(const Form& other) {
+    if (this != &other) {
+        _isSigned = other._isSigned; // _name and grades are const, so only _isSigned is copied
+    }
     return *this;
 }
 
+// Destructor
+Form::~Form() {}
+
 // Getters
-const std::string &Form::getName() const { return _name; }
+const std::string& Form::getName() const { return _name; }
 bool Form::isSigned() const { return _isSigned; }
 int Form::getGradeToSign() const { return _gradeToSign; }
 int Form::getGradeToExecute() const { return _gradeToExecute; }
 
-// Signing the form
-void Form::beSigned(const Bureaucrat &bureaucrat)
-{
-    if (bureaucrat.getGrade() > _gradeToSign)
-        throw GradeTooLowException();
+// Signing logic
+void Form::beSigned(const Bureaucrat& b) {
+    if (b.getGrade() > _gradeToSign)
+        throw Form::GradeTooLowException();
     _isSigned = true;
 }
 
-// Overload << Operator
-std::ostream &operator<<(std::ostream &os, const Form &form)
-{
-    os << "Form: " << form.getName()
-       << " | Required Grade to Sign: " << form.getGradeToSign()
-       << " | Required Grade to Execute: " << form.getGradeToExecute()
-       << " | Signed: " << (form.isSigned() ? "Yes" : "No");
-    return os;
+// Exception Messages
+const char* Form::GradeTooHighException::what() const throw() {
+    return "FormException: Grade too high!";
+}
+
+const char* Form::GradeTooLowException::what() const throw() {
+    return "FormException: Grade too low!";
+}
+
+// Overloaded Output Operator
+std::ostream& operator<<(std::ostream& out, const Form& form) {
+    out << "Form: " << form.getName() 
+        << " | Signed: " << (form.isSigned() ? "Yes" : "No") 
+        << " | Grade to Sign: " << form.getGradeToSign() 
+        << " | Grade to Execute: " << form.getGradeToExecute();
+    return out;
 }

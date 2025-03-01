@@ -3,6 +3,7 @@
 
 #include <iostream>
 #include <stdexcept>
+#include <string>
 
 class Bureaucrat {
 private:
@@ -10,34 +11,27 @@ private:
     int grade;
 
 public:
-    // Custom Exceptions
+    Bureaucrat(const std::string &name, int grade);
+    Bureaucrat(const Bureaucrat &other);
+    Bureaucrat &operator=(const Bureaucrat &other);
+    ~Bureaucrat();
+
+    std::string getName() const;
+    int getGrade() const;
+    void incrementGrade();
+    void decrementGrade();
+
     class GradeTooHighException : public std::exception {
     public:
-        const char* what() const noexcept override;
+        const char *what() const throw();
     };
 
     class GradeTooLowException : public std::exception {
     public:
-        const char* what() const noexcept override;
+        const char *what() const throw();
     };
-
-    // Constructor & Destructor
-    Bureaucrat(const std::string& name, int grade);
-    ~Bureaucrat();
-
-    // Getters
-    std::string getName() const;
-    int getGrade() const;
-
-    // Grade Modification
-    void upgrade();
-    void downgrade();
-
-    // Function for formatted output (to replace friend operator<<)
-    std::string toString() const;
 };
 
-// Overloaded output operator (calls toString() instead of using friend)
-std::ostream& operator<<(std::ostream& out, const Bureaucrat& b);
+std::ostream &operator<<(std::ostream &os, const Bureaucrat &bureaucrat);
 
 #endif // BUREAUCRAT_HPP
